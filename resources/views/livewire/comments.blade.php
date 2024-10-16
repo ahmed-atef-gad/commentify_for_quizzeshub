@@ -18,10 +18,21 @@
                 <a class="mt-2 text-sm" href="/login">Log in to comment!</a>
             @endauth
             @if($comments->count())
-                @foreach($comments as $comment)
-                    <livewire:comment :$comment :key="$comment->id"/>
-                @endforeach
-                {{$comments->links()}}
+                <button wire:click="toggleComments">
+                    {{ $showComments ? 'Hide Comments' : 'Show Comments('.$comments->count().')' }}
+                </button>
+
+                @if($showComments)
+                <select wire:model.live="sortBy" class="select5">
+                    <option class="option5" value="newest">Newest</option>
+                    <option class="option5" value="most_liked">Most Liked</option>
+                </select>
+
+                    @foreach($this->sortedComments   as $comment)
+                        <livewire:comment :$comment :key="$comment->id"/>
+                    @endforeach
+                    {{$comments->links()}}
+                @endif
             @else
                 <p>No comments yet!</p>
             @endif

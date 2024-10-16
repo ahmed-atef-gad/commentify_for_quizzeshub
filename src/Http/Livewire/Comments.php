@@ -19,7 +19,10 @@ class Comments extends Component
     public $users = [];
 
     public $showDropdown = false;
-    
+    public $showComments = false;
+    public $sortBy = 'newest';
+
+
     protected $numberOfPaginatorsRendered = [];
 
     public $newCommentState = [
@@ -33,6 +36,25 @@ class Comments extends Component
     protected $validationAttributes = [
         'newCommentState.body' => 'comment'
     ];
+
+    public function toggleComments()
+    {
+        $this->showComments = !$this->showComments;
+    }
+
+    public function getSortedCommentsProperty()
+    {
+        if ($this->sortBy === 'most_liked') {
+            return $this->model->comments()->with('user', 'children.user', 'children.children')
+            ->parent()->withCount('likes')->orderBy('likes_count', 'desc')->paginate(config('commentify.pagination_count',10));
+        }
+        return $this->model->comments()
+        ->with('user', 'children.user', 'children.children')
+        ->parent()
+        ->latest()
+        ->paginate(config('commentify.pagination_count',10));
+    }
+
 
     /**
      * @return Factory|Application|View|\Illuminate\Contracts\Foundation\Application|null

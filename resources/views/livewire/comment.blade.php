@@ -1,4 +1,4 @@
-<div>
+<div >
     @if($isEditing)
         @include('commentify::livewire.partials.comment-form',[
             'method'=>'editComment',
@@ -13,20 +13,22 @@
 
 
                 <div class="flex items-center">
-                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
+                    <p class="inline-flex items-center mr-3 text-sm text-gray-900" style="display: inline-flex"><img
                                 class="mr-2 w-6 h-6 rounded-full"
-                                src="{{$comment->user->avatar()}}"
-                                alt="{{$comment->user->name}}">{{Str::ucfirst($comment->user->name)}}</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                                style="width: 30px; height: 30px; border-radius: 50%;"
+                                @if($comment->user->avatar() !=null && file_exists('storage/'.$comment->user->avatar()))src="{{asset('storage/'.$comment->user->avatar())}}"@else src="{{asset('dashboard/assets')}}/images/default.jpg"@endif
+                                alt="{{$comment->user->fname}}">{{Str::ucfirst($comment->user->fname).' '.Str::ucfirst($comment->user->lname)}}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" style="display:inline-flex; margin-bottom:10px;">
                         <time pubdate datetime="{{$comment->presenter()->relativeCreatedAt()}}"
                               title="{{$comment->presenter()->relativeCreatedAt()}}">
                             {{$comment->presenter()->relativeCreatedAt()}}
                         </time>
                     </p>
                 </div>
-                <div class="relative">
+                <div class="relative" style="/*position: relative; right: -16rem; top: -3rem*/">
                     <button wire:click="$toggle('showOptions')"
                             class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                            style="/*display: inline-flex;  border-radius: 0.5rem;*/ "
                             type="button">
                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">

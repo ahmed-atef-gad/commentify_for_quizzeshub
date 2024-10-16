@@ -25,6 +25,7 @@ class Like extends Component
     {
         $ip = request()->ip();
         $userAgent = request()->userAgent();
+        // dd($ip, $userAgent);
         if ($this->comment->isLiked()) {
             $this->comment->removeLike();
 
