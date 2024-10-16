@@ -1,12 +1,13 @@
 {
-    "name": "usamamuneerchaudhary/commentify",
-    "description": "Easy Laravel Livewire Comments with TailwindCSS UI",
+    "name": "ahmed_atef_gad/commentify_for_quizzeshub",
+    "description": "Customized Commentify package for QuizzesHub project",
     "keywords": [
         "usamamuneerchaudhary",
         "laravel-livewire",
         "livewire",
         "comments",
         "commentify",
+        "quizzeshub",
         "livewire-comments"
     ],
     "license": "MIT",
